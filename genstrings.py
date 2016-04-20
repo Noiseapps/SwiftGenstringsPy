@@ -29,7 +29,7 @@ def create_string_for_write(found_strings):
 
 
 def search_for_files():
-    found_strings = set()
+    found_strings = list()
     print "\nSearching for files in directory {0}".format(search_path)
 
     files = os.listdir(search_path)
@@ -45,7 +45,8 @@ def search_for_files():
 
     print "\nFound {0} localized strings in source files".format(len(found_strings))
 
-    save_to_file(found_strings)
+    strings = set(found_strings)
+    save_to_file(strings)
 
 
 def save_to_file(found_strings):
@@ -78,7 +79,7 @@ def parse_line(found_strings, line):
         if match is not None:
             found_string = match.groups()[0]
             print "Pattern match for string {0}".format(found_string)
-            found_strings.add(found_string)
+            found_strings.append(found_string)
 
 if __name__ == '__main__':
     main()
