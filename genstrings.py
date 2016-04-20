@@ -19,9 +19,12 @@ def invalid_argument_list():
 
 
 def create_string_for_write(found_strings):
-    ready_string = ""
+    ready_string = "/*\nCreated by genstrings.py app. \n"
+    ready_string += "The source code and more information is available on \n"
+    ready_string += "https://github.com/Noiseapps/SwiftGenstringsPy\n*/\n\n"
     for string in found_strings:
-        ready_string += string + "=\"PLACEHOLDER\";\n"
+        str_format = "\"{0}\"=\"PLACEHOLDER\";\n".format(string)
+        ready_string += str_format
     return ready_string
 
 
@@ -70,12 +73,12 @@ def search_single_file(f, found_strings):
 
 
 def parse_line(found_strings, line):
-    matcher = re.search("(.*(\".*\")(.localize\(\)).*)", line)
-    if matcher is not None:
-        found_string = matcher.groups()[1]
-        print "Pattern match for string {0}".format(found_string)
-        found_strings.add(found_string)
-
+    pattern = re.compile("\"([^\"]*)\"\.localize\(\)", re.I|re.U)
+    for match in pattern.finditer(line):
+        if match is not None:
+            found_string = match.groups()[0]
+            print "Pattern match for string {0}".format(found_string)
+            found_strings.add(found_string)
 
 if __name__ == '__main__':
     main()
