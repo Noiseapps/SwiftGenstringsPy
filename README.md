@@ -38,10 +38,9 @@ So, that's how this script was born 😄
 2. `python genstrings.py /path/to/your/ios/project/root`
 3. Copy output `Localized.strings` and send it to your translators to fill the placeholders :) 
 
-#### Limitations / TODO 
-* Only recognizes one localizable string per line
-* Requires the function name to be `localize()`
-* Cannot traverse recursive structure
+#### Limitations / TODO
+* Requires specific localization construct : `"Desired key".localize()`
+* Cannot traverse folder structure
 
 I'll try to fix them in my spare time, but if you find the solution earlier on, send a pull request :) 
 
